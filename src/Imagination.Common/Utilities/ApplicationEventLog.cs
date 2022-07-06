@@ -53,16 +53,16 @@ namespace Imagination
 
         private static void MapLoggerLevels()
         {
-            _LogLevelMap = new Dictionary<EventLogEntryType, Action<string>>();
+            //_LogLevelMap = new Dictionary<EventLogEntryType, Action<string>>();
 
-            if (EventLogEntryType.Information <= _Level)
-                _LogLevelMap.Add(EventLogEntryType.Information, m => _Logger.Value.LogInformation("{0}", m));
-            if (EventLogEntryType.Warning <= _Level)
-                _LogLevelMap.Add(EventLogEntryType.Warning, m => _Logger.Value.LogWarning("{0}", m));
-            if (EventLogEntryType.Error <= _Level)
-                _LogLevelMap.Add(EventLogEntryType.Error, m => _Logger.Value.LogError("{0}", m));
-            //_LogLevelMap.Add(EventLogEntryType.FailureAudit, m => _Logger.Value.LogInformation("{0}", m));
-            //_LogLevelMap.Add(EventLogEntryType.SuccessAudit, m => _Logger.Value.LogInformation("{0}", m));
+            //if (EventLogEntryType.Information <= _Level)
+            //    _LogLevelMap.Add(EventLogEntryType.Information, m => _Logger.Value.LogInformation("{0}", m));
+            //if (EventLogEntryType.Warning <= _Level)
+            //    _LogLevelMap.Add(EventLogEntryType.Warning, m => _Logger.Value.LogWarning("{0}", m));
+            //if (EventLogEntryType.Error <= _Level)
+            //    _LogLevelMap.Add(EventLogEntryType.Error, m => _Logger.Value.LogError("{0}", m));
+            ////_LogLevelMap.Add(EventLogEntryType.FailureAudit, m => _Logger.Value.LogInformation("{0}", m));
+            ////_LogLevelMap.Add(EventLogEntryType.SuccessAudit, m => _Logger.Value.LogInformation("{0}", m));
         }
 
         public static void WriteEntry(string message)
@@ -82,12 +82,12 @@ namespace Imagination
 
         public static void WriteEntry(string source, string message, EventLogEntryType type)
         {
-            Action<string> levelLogger;
-            if (_Logger != null && _LogLevelMap.TryGetValue(type, out levelLogger))
-            {
-                levelLogger(message);
-            }
-            else
+            //Action<string> levelLogger;
+            //if (_Logger != null && _LogLevelMap.TryGetValue(type, out levelLogger))
+            //{
+            //    levelLogger(message);
+            //}
+            //else
             {
                 Console.WriteLine($"{type.ToString()}: {message}");
             }

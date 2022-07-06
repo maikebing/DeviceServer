@@ -297,7 +297,7 @@ namespace Imagination.DataAccess
 				catch (Exception ex)
 				{
 					connectionError = true;
-					ApplicationEventLog.WriteEntry("Flow", string.Format("DALRabbitMQ::PublishMessages - Exception\n{0}", ex), System.Diagnostics.EventLogEntryType.Error);
+				//	ApplicationEventLog.WriteEntry("Flow", string.Format("DALRabbitMQ::PublishMessages - Exception\n{0}", ex), System.Diagnostics.EventLogEntryType.Error);
 				}
 				if (abort)
 					break;
@@ -708,11 +708,11 @@ namespace Imagination.DataAccess
 				{
 					if (_PublishConfirmMessagesThread == null)
 					{
-						_PublishConfirmMessagesThread = new Thread(new ThreadStart(PublishConfirmMessages));
-						if (_PublishConfirmMessagesThread.Name == null)
-							_PublishConfirmMessagesThread.Name = "PublishConfirmMessages";
-						_PublishConfirmMessagesThread.IsBackground = true;
-						_PublishConfirmMessagesThread.Start();
+						//_PublishConfirmMessagesThread = new Thread(new ThreadStart(PublishConfirmMessages));
+						//if (_PublishConfirmMessagesThread.Name == null)
+						//	_PublishConfirmMessagesThread.Name = "PublishConfirmMessages";
+						//_PublishConfirmMessagesThread.IsBackground = true;
+						//_PublishConfirmMessagesThread.Start();
 					}
 				}
 			}
