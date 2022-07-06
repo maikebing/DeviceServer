@@ -424,8 +424,7 @@ namespace Imagination.DataAccess
 
 		private void NotifyClientsCallback(IAsyncResult result)
 		{
-			NotificationEventHandler notifyDelegate = (NotificationEventHandler)((System.Runtime.Remoting.Messaging.AsyncResult)result).AsyncDelegate;
-			notifyDelegate.EndInvoke(result);
+	//		notifyDelegate.EndInvoke(result);
 		}
 
 		private void ProcessMessage(string messageText)

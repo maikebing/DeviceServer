@@ -258,7 +258,7 @@ namespace Imagination.DataAccess
 					RabbitMQConnection server = _Servers[_CurrentHostIndex];
 					_CurrentHostIndex = (_CurrentHostIndex + 1) % _ServerCount;
 					ConnectionFactory connectionFactory = new ConnectionFactory();
-                    connectionFactory.uri = server.Uri;
+                    connectionFactory.Uri = server.Uri;
 					if (!string.IsNullOrEmpty(server.Username))
 						connectionFactory.UserName = server.Username;
 					if (!string.IsNullOrEmpty(server.Password))
@@ -388,7 +388,7 @@ namespace Imagination.DataAccess
                     RabbitMQConnection server = _Servers[_CurrentHostIndex];
                     _CurrentHostIndex = (_CurrentHostIndex + 1) % _ServerCount;
 					ConnectionFactory connectionFactory = new ConnectionFactory();
-                    connectionFactory.uri = server.Uri;
+                    connectionFactory.Uri = server.Uri;
                     if (!string.IsNullOrEmpty(server.Username))
                         connectionFactory.UserName = server.Username;
                     if (!string.IsNullOrEmpty(server.Password))
@@ -492,7 +492,7 @@ namespace Imagination.DataAccess
                     RabbitMQConnection server = _Servers[_CurrentHostIndex];
                     _CurrentHostIndex = (_CurrentHostIndex + 1) % _ServerCount;
 					ConnectionFactory connectionFactory = new ConnectionFactory();
-                    connectionFactory.uri = server.Uri;
+                    connectionFactory.Uri = server.Uri;
                     if (!string.IsNullOrEmpty(server.Username))
                         connectionFactory.UserName = server.Username;
                     if (!string.IsNullOrEmpty(server.Password))
@@ -873,7 +873,7 @@ namespace Imagination.DataAccess
 				{
 					ConnectionFactory connectionFactory = new ConnectionFactory();
                     RabbitMQConnection server = _Servers[index];
-                    connectionFactory.uri = server.Uri;
+                    connectionFactory.Uri = server.Uri;
                     if (!string.IsNullOrEmpty(server.Username))
                         connectionFactory.UserName = server.Username;
                     if (!string.IsNullOrEmpty(server.Password))
@@ -901,7 +901,7 @@ namespace Imagination.DataAccess
 				string messageFilename = Path.ChangeExtension(filename, ".msg");
 				if (!File.Exists(messageFilename))
 				{
-					File.WriteAllBytes(filename, args.Body);
+					File.WriteAllBytes(filename, args.Body.ToArray());
 					File.Move(filename, messageFilename);
 				}
 			}

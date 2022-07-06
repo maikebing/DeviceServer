@@ -237,7 +237,7 @@ namespace Imagination.BusinessLogic
 				_PublishNotificationsThread.Start();
 			}
             Trace.WriteLine(TTracePriority.High, "Queue StartWaiting");
-			string setting = ConfigurationManager.AppSettings["AlwaysNotify"];
+            string setting = ""; //TODO:TConfigurationManager.AppSettings["AlwaysNotify"];
 			bool alwaysNotify;
 			if (bool.TryParse(setting, out alwaysNotify))
 				_AlwaysNotify = alwaysNotify;

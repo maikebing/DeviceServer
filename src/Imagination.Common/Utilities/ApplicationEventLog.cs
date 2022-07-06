@@ -33,11 +33,11 @@ namespace Imagination
     public class ApplicationEventLog
     {
 
-        private static Lazy<ILogger> _Logger = new Lazy<ILogger>(() => { 
+        private static Lazy<ILogger> _Logger = new Lazy<ILogger>(() => {
             if (ServiceConfiguration.LoggerFactory != null)
                 return ServiceConfiguration.LoggerFactory.CreateLogger(nameof(ApplicationEventLog));
             else
-                return new ConsoleLogger(nameof(ApplicationEventLog), ((x, y) => true), true);
+                return null;
         });
 
         private static EventLogEntryType _Level = EventLogEntryType.Information;
@@ -96,12 +96,12 @@ namespace Imagination
 
         public static void Write(string message, Exception exception = null)
         {
-            _Logger.Value.Log(Microsoft.Extensions.Logging.LogLevel.Information, 0, new Microsoft.Extensions.Logging.Internal.FormattedLogValues(message, new object[0]), exception, MessageFormatter);
+          // _Logger.Value.Log(Microsoft.Extensions.Logging.LogLevel.Information, 0, new Microsoft.Extensions.Logging..FormattedLogValues(message, new object[0]), exception, MessageFormatter);
         }
 
         public static void Write(Microsoft.Extensions.Logging.LogLevel level, string message, Exception exception = null)
         {
-            _Logger.Value.Log(level, 0, new Microsoft.Extensions.Logging.Internal.FormattedLogValues(message, new object[0]), exception, MessageFormatter);
+        //    _Logger.Value.Log(level, 0, new Microsoft.Extensions.Logging.Internal.FormattedLogValues(message, new object[0]), exception, MessageFormatter);
         }
 
         public class MultilineLogEntry : IDisposable
@@ -131,7 +131,7 @@ namespace Imagination
 
             public void Dispose()
             {
-                _Logger.Log(_Level, 0, new Microsoft.Extensions.Logging.Internal.FormattedLogValues(_builder.ToString(), new object[0]), _Exception, MessageFormatter);
+              //  _Logger.Log(_Level, 0, new Microsoft.Extensions.Logging.Internal.FormattedLogValues(_builder.ToString(), new object[0]), _Exception, MessageFormatter);
             }
         }
 

@@ -160,7 +160,7 @@ namespace Imagination.LWM2M
                 Console.WriteLine("No Certificate or PSK supplied.");
             }
 
-            result.DataReceived += new DTLS.Client.DataReceivedEventHandler(FireDataReceived);
+            result.SetDataReceivedFunction(  FireDataReceived);
             //if (_ReceiveBufferSize > 0)
             //{
             //    result.ReceiveBufferSize = _ReceiveBufferSize;
@@ -216,17 +216,17 @@ namespace Imagination.LWM2M
 
 			if (_Client != null)
 			{
-				_Client.Stop();
+				_Client.Dispose();
 				_Client = null;
 			}
 			if (_ClientIPv4 != null)
 			{
-                _ClientIPv4.Stop();
+                _ClientIPv4.Dispose();
 				_ClientIPv4 = null;
 			}
 		}
 
-		public void Send(byte[] data, System.Net.EndPoint ep)
+		public async void Send(byte[] data, System.Net.EndPoint ep)
 		{
             DTLS.Client socket = _Client;
             IPEndPoint remoteEP = (IPEndPoint)ep;
@@ -244,11 +244,11 @@ namespace Imagination.LWM2M
             }
             if (!_Connected)
             {
-                socket.ConnectToServer(remoteEP);
+              await  socket.ConnectToServerAsync (remoteEP);
                 _Connected = true;
             }
 
-            socket.Send(data);
+         await   socket.SendAsync(data);
 		}
 
 		public void Dispose()

@@ -73,7 +73,7 @@ namespace Imagination.LWM2M
         public BootstrapServer()
 		{
             _PSKIdentities = new PSKIdentities();
-			_Port = Spec.Default.DefaultPort;
+			_Port = Spec.DefaultPort ;
 			_CoapServer.MessageDeliverer = this;
             SecureOnly = true;
 

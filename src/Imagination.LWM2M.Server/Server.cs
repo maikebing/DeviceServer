@@ -31,7 +31,6 @@ using CoAP.Server;
 using Imagination.Model;
 using System.Collections.Concurrent;
 using System.ServiceModel;
-using System.ServiceModel.Description;
 using DTLS;
 using System.Net.Sockets;
 using Microsoft.Extensions.Logging;
@@ -61,7 +60,6 @@ namespace Imagination.LWM2M
 		private CoapServer _CoapServer;
 		private NativeIPCServer _NativeServerAPI;
         private NativeIPCServer _NativeServerAPIv6;
-        private ServiceHost _ServiceHost;
 		private string _ServerEndPoint;
         private FlowSecureChannel _SecureChannel;
 
@@ -322,7 +320,7 @@ namespace Imagination.LWM2M
 		{
 			CoAP.Log.LogManager.Level = CoAP.Log.LogLevel.Error;
 			int port;
-			string apiPort = System.Configuration.ConfigurationManager.AppSettings["APIPort"];
+            string apiPort = "14080";//TODO: System.Configuration.ConfigurationManager.AppSettings["APIPort"];
 			if (!int.TryParse(apiPort, out port))
 				port = 14080;
 			_ProcessRequestsThread = new Thread(new ThreadStart(ProcessRequests));
@@ -395,11 +393,11 @@ namespace Imagination.LWM2M
         public void Stop()
 		{
 			_Terminate = true;
-			if (_ServiceHost != null)
-			{
-				_ServiceHost.Close();
-				_ServiceHost = null;
-			}
+			//if (_ServiceHost != null)
+			//{
+			//	_ServiceHost.Close();
+			//	_ServiceHost = null;
+			//}
 			if (_NativeServerAPI != null)
 			{
 				_NativeServerAPI.Stop();

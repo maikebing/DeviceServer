@@ -58,9 +58,10 @@ namespace Imagination.WebService.DeviceServer
                 .AddEnvironmentVariables();
 
             builder.AddEnvironmentVariables();
+       
             Configuration = builder.Build();
-            ServiceConfiguration.LoadConfig(Configuration.GetSection("ServiceConfiguration"));
-            ServiceConfiguration.LoggerFactory = _LoggerFactory;
+
+
             BusinessLogic.BusinessLogicFactory.Initialise();
             RequestExtensions.SetEnvironment(env.IsDevelopment());
         }
@@ -79,8 +80,8 @@ namespace Imagination.WebService.DeviceServer
             //signingKey = new RsaSecurityKey(keyParams);
             //services.AddSingleton(new SigningCredentials(signingKey, SecurityAlgorithms.RsaSha256));
 
-            signingKey = new SymmetricSecurityKey(System.Text.Encoding.ASCII.GetBytes(ServiceConfiguration.SigningKey)); // This could be changed every hour or so
-            signingKey.CryptoProviderFactory = new MonoFriendlyCryptoProviderFactory(_LoggerFactory.CreateLogger<MonoFriendlyCryptoProviderFactory>());
+            signingKey = null;// new SymmetricSecurityKey(System.Text.Encoding.ASCII.GetBytes(ServiceConfiguration.SigningKey)); // This could be changed every hour or so
+            signingKey.CryptoProviderFactory = null;// new MonoFriendlyCryptoProviderFactory(_LoggerFactory.CreateLogger<MonoFriendlyCryptoProviderFactory>());
 
             services.AddSingleton(new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256));
 
@@ -108,7 +109,7 @@ namespace Imagination.WebService.DeviceServer
                 // Where external tokens are used, some leeway here could be useful.
                 options.TokenValidationParameters.ClockSkew = TimeSpan.FromMinutes(0);
 
-                options.AutomaticAuthenticate = true;
+           //     options.AutomaticAuthenticate = true;
 #if DEBUG
                 options.RequireHttpsMetadata = false; // not in prod
 #else
@@ -122,10 +123,10 @@ namespace Imagination.WebService.DeviceServer
             {
                 options.RespectBrowserAcceptHeader = true;
                 options.InputFormatters.Clear();
-                options.InputFormatters.Add(new MediaTypeJsonInputFormatter(_LoggerFactory.CreateLogger<MediaTypeJsonInputFormatter>()));
+               // options.InputFormatters.Add(new MediaTypeJsonInputFormatter(_LoggerFactory.CreateLogger<MediaTypeJsonInputFormatter>()));
                 options.InputFormatters.Add(new MediaTypeXmlSerializerInputFormatter());
                 options.OutputFormatters.Clear();
-                options.OutputFormatters.Add(new MediaTypeJsonOutputFormatter());
+          //      options.OutputFormatters.Add( ).Add( new MediaTypeJsonOutputFormatter( );
                 options.OutputFormatters.Add(new MediaTypeXmlSerializerOutputFormatter());
 
                 // Register filter globally
@@ -149,10 +150,10 @@ namespace Imagination.WebService.DeviceServer
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IOptions<JwtBearerOptions> authOptions)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+           // loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            //loggerFactory.AddDebug();
 
-            app.UseJwtBearerAuthentication(authOptions.Value);
+        //    app.UseJwtBearerAuthentication(authOptions.Value);
 
 #if DEBUG
             app.UseCors("allowEveryThingPolicy");
@@ -163,7 +164,7 @@ namespace Imagination.WebService.DeviceServer
             app.UseMvc();
 
 
-            ServiceConfiguration.DisplayConfig();
+            //ServiceConfiguration.DisplayConfig();
         }
 
     }

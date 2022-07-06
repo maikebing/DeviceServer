@@ -134,7 +134,7 @@ namespace Imagination.DataAccess
 			{
 			}
 
-			void IBasicConsumer.HandleBasicDeliver(string consumerTag, ulong deliveryTag, bool redelivered, string exchange, string routingKey, IBasicProperties properties, byte[] body)
+			void IBasicConsumer.HandleBasicDeliver(string consumerTag, ulong deliveryTag, bool redelivered, string exchange, string routingKey, RabbitMQ.Client.IBasicProperties properties, System.ReadOnlyMemory<byte> body) 
 			{
 				try
 				{
@@ -142,7 +142,7 @@ namespace Imagination.DataAccess
 					{
 						Interlocked.Increment(ref _MessageHandlingCount);
                         MessageFormatter messageFormatter = new MessageFormatter();
-                        ServiceEventMessage message = messageFormatter.Deserialise(new MemoryStream(body));
+                        ServiceEventMessage message = messageFormatter.Deserialise(new MemoryStream(body.ToArray()));
 						lock (_Queues)
 						{
 							if (_Queues.ContainsKey(consumerTag))
@@ -191,7 +191,7 @@ namespace Imagination.DataAccess
 				catch (System.Runtime.Serialization.SerializationException)
 				{
 					string path = GetBadMessageDirectory();
-					File.WriteAllBytes(Path.Combine(path,string.Concat(consumerTag,"_", Guid.NewGuid().ToString())),body);
+					File.WriteAllBytes(Path.Combine(path,string.Concat(consumerTag,"_", Guid.NewGuid().ToString())),body.ToArray());
 					_Model.BasicReject(deliveryTag, false);
 					Interlocked.Decrement(ref _MessageHandlingCount);
 				}
@@ -270,7 +270,11 @@ namespace Imagination.DataAccess
 				}
 			}
 
-		}
+            public void HandleBasicDeliver(string consumerTag, ulong deliveryTag, bool redelivered, string exchange, string routingKey, IBasicProperties properties, ReadOnlyMemory<byte> body)
+            {
+                throw new NotImplementedException();
+            }
+        }
 
 
 
@@ -399,7 +403,7 @@ namespace Imagination.DataAccess
 					connectionError = false;
 					_ConnectionShutdown = false;
 					ConnectionFactory connectionFactory = new ConnectionFactory();
-                    connectionFactory.uri = _Server.Uri;
+                    connectionFactory.Uri = _Server.Uri;
                     if (!string.IsNullOrEmpty(_Server.Username))
                         connectionFactory.UserName = _Server.Username;
                     if (!string.IsNullOrEmpty(_Server.Password))

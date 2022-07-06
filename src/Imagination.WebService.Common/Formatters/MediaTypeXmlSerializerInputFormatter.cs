@@ -37,9 +37,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             MediaTypeHeaderValue requestContentType;
             if (this.CanReadType(context.ModelType) && MediaTypeHeaderValue.TryParse(context.HttpContext.Request.ContentType, out requestContentType))
             {
-                if ((string.Compare(requestContentType.Type, "application", true) == 0) && requestContentType.SubType.EndsWith("+xml", StringComparison.InvariantCultureIgnoreCase))
-                    result = true;
-                else
+                
                     result = base.CanRead(context);
             }
 

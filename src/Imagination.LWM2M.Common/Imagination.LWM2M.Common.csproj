@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Imagination.LWM2M.Common Class Library</Description>
+    <VersionPrefix>1.0.5</VersionPrefix>
+    <Authors>Imagination Technologies</Authors>
+      <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>Imagination.LWM2M.Common</AssemblyName>
+    <PackageId>Imagination.LWM2M.Common</PackageId>
+    <PackageTargetFallback>$(PackageTargetFallback);netstandard1.5</PackageTargetFallback>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Imagination.Common\Imagination.Common.csproj" />
+    <ProjectReference Include="..\Imagination.Service.Common\Imagination.Service.Common.csproj" />
+    <ProjectReference Include="..\Imagination.Model\Imagination.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DTLS2.Net" Version="1.1.3" />
+    <PackageReference Include="IoTSharp.CoAP.NET" Version="2.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.6" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Imagination.Service.Common Class Library</Description>
+    <Authors>Imagination Technologies</Authors>
+      <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>Imagination.Service.Common</AssemblyName>
+    <PackageId>Imagination.Service.Common</PackageId>
+    <PackageTargetFallback>$(PackageTargetFallback);netstandard1.5</PackageTargetFallback>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Imagination.Common\Imagination.Common.csproj" />
+    <ProjectReference Include="..\Imagination.Model\Imagination.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Xml" Version="2.2.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.21.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Buffers" Version="4.5.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.21.0" />
+  </ItemGroup>
+
+ 
+
+</Project>

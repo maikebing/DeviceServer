@@ -30,30 +30,30 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters
 {
-    public class MediaTypeJsonOutputFormatter : JsonOutputFormatter
-    {
-        public MediaTypeJsonOutputFormatter() : base()
-        {
-            this.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-        }
+    //public class MediaTypeJsonOutputFormatter : JsonOutputFormatter
+    //{
+    //    public MediaTypeJsonOutputFormatter() : base()
+    //    {
+    //        this.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+    //    }
 
-        public MediaTypeJsonOutputFormatter(JsonSerializerSettings serializerSettings) : base(serializerSettings)
-        {
-            serializerSettings.NullValueHandling = NullValueHandling.Ignore;
-        }
+    //    public MediaTypeJsonOutputFormatter(JsonSerializerSettings serializerSettings) : base(serializerSettings)
+    //    {
+    //        serializerSettings.NullValueHandling = NullValueHandling.Ignore;
+    //    }
 
 
-        public override bool CanWriteResult(OutputFormatterCanWriteContext context)
-        {
-            bool result = false;
-            if (this.CanWriteType(context.ObjectType))
-            {
-               if ((context.ContentType != null) && (context.ContentType.StartsWith("application", StringComparison.InvariantCultureIgnoreCase)) && context.ContentType.EndsWith("+json", StringComparison.InvariantCultureIgnoreCase))
-                    result = true;
-                else
-                    result = base.CanWriteResult(context);
-            }
-            return result;
-        }
-    }
+    //    public override bool CanWriteResult(OutputFormatterCanWriteContext context)
+    //    {
+    //        bool result = false;
+    //        if (this.CanWriteType(context.ObjectType))
+    //        {
+    //           if ((context.ContentType != null) && (context.ContentType.StartsWith("application", StringComparison.InvariantCultureIgnoreCase)) && context.ContentType.EndsWith("+json", StringComparison.InvariantCultureIgnoreCase))
+    //                result = true;
+    //            else
+    //                result = base.CanWriteResult(context);
+    //        }
+    //        return result;
+    //    }
+    //}
 }

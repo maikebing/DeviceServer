@@ -35,6 +35,7 @@ using Imagination.BusinessLogic;
 using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 using Imagination.Documentation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Imagination.Controllers
 {

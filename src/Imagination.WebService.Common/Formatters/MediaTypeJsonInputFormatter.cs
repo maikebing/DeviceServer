@@ -35,8 +35,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 {
     public class MediaTypeJsonInputFormatter : JsonInputFormatter
     {
-        public MediaTypeJsonInputFormatter(ILogger logger) : base(logger) { }
-        public MediaTypeJsonInputFormatter(ILogger logger, JsonSerializerSettings serializerSettings) : base (logger, serializerSettings) { }
+      //  public MediaTypeJsonInputFormatter(ILogger logger) : base(logger) { }
+      //  public MediaTypeJsonInputFormatter(ILogger logger, JsonSerializerSettings serializerSettings) : base (logger, serializerSettings) { }
         public MediaTypeJsonInputFormatter(ILogger logger, JsonSerializerSettings serializerSettings, ArrayPool<char> charPool, ObjectPoolProvider objectPoolProvider) : base (logger, serializerSettings, charPool, objectPoolProvider) { }
 
 
@@ -46,9 +46,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             MediaTypeHeaderValue requestContentType;
             if (this.CanReadType(context.ModelType) && MediaTypeHeaderValue.TryParse(context.HttpContext.Request.ContentType, out requestContentType))
             {
-                if ((string.Compare(requestContentType.Type, "application", true) == 0) && requestContentType.SubType.EndsWith("+json", StringComparison.InvariantCultureIgnoreCase))
-                    result = true;
-                else
+                //if ((string.Compare(requestContentType.Type, "application", true) == 0) && requestContentType.SubType.EndsWith("+json", StringComparison.InvariantCultureIgnoreCase))
+                //    result = true;
+                //else
                     result = base.CanRead(context); 
             }
 
